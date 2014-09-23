@@ -7,6 +7,9 @@ sed -i -r 's/(defaults\s+)1 1/\10 0/' /etc/fstab
 sed -i '/splashimage/d;s_timeout.*$_timeout=0_;s/ rhgb quiet//g' \
   /boot/grub/grub.conf
 
+# Faster ssh connection
+sed -i -r 's/#(UseDNS).*/\1 no/' /etc/ssh/sshd_config
+
 # Hotplug always tries to load this and it doesn't play well with
 # VirtualBox. Always complains to upgrade BIOS.
 echo 'blacklist i2c_piix4' >> /etc/modprobe.d/blacklist.conf
